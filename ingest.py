@@ -19,11 +19,7 @@ text_splitter = RecursiveCharacterTextSplitter(
 
 chunks = text_splitter.split_documents(documents)
 
-print(f"Loaded {len(documents)} pages")
 print(f"Created {len(chunks)} chunks")
-
-print("\nFirst Chunk:\n")
-print(chunks[0].page_content[:500])
 
 print("\nCreating embeddings...")
 
@@ -42,16 +38,3 @@ vectorstore = Chroma.from_documents(
 )
 
 print("Vector database created successfully")
-
-# Test retrieval
-print("\nTesting retrieval...")
-
-results = vectorstore.similarity_search(
-    "What is Artificial Intelligence?",
-    k=3
-)
-
-for i, result in enumerate(results):
-    print(f"\nResult {i+1}")
-    print("-" * 50)
-    print(result.page_content[:500])
